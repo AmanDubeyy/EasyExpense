@@ -5,7 +5,7 @@ import Expense from "../../../model/expense";
 
 export async function GET() {
   try {
-    await mongoose.connect(DATABASE_URL, {
+    await mongoose.connect(MONGO_URL, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });

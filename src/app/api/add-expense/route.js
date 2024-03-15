@@ -10,20 +10,13 @@ export async function POST(req, res) {
       useUnifiedTopology: true,
     });
 
-    mongoose.disconnect();
-
     const data = await req.json();
 
-    var expense = new Expense(data);
+    var expense = new Expense();
 
-    expense
-      .save()
-      .then((item) => {
-        return NextResponse.json({ code: "success", data: item });
-      })
-      .catch((err) => {
-        return NextResponse.json({ code: "failed", message: err });
-      });
+    expense.save();
+
+    return NextResponse.json({ code: "success", data: data });
   } catch (e) {
     return NextResponse.json({ code: "failed", message: e.message });
   }
