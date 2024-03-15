@@ -6,6 +6,7 @@ const ExpenseSchema = new Schema({
     'category' : String,
     'paid_by' : String,
     'user_id' : Number,
+    'split_between': Array, // [user_id -> amount ] 
 })
 
 const Expense = mongoose.models.expense || mongoose.model('expense', ExpenseSchema);

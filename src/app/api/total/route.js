@@ -6,10 +6,14 @@ import Expense from "../../../model/expense";
 export async function GET() {
   try{
 
-    mongoose.connect(MONGO_URL);
-    
-    const data = await Expense.find({});
+    await mongoose.connect(MONGO_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+  });
 
+    var data = await Expense.find({});
+
+    mongoose.disconnect(); 
     return NextResponse.json({code : 'success', data : data})
   } catch(e){
     return NextResponse.json({code : 'failed', message : e.message})
