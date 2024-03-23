@@ -15,7 +15,7 @@ function page() {
 
   return (
     <div className="flex flex-col">
-      <div className="font-sans font-extrabold text-4xl text-center sticky top-0 z-5 bg-black p-12">
+      <div className="font-sans font-extrabold text-4xl text-center sticky top-0 z-5 bg-black p-12 text-white">
         Recent Activity
       </div>
       <div className="">

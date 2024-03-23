@@ -1,8 +1,11 @@
 import React from 'react'
+import Modal from '../Add'
 
 function page() {
   return (
-    <div>page</div>
+    <div>
+      <Modal></Modal>
+    </div>
   )
 }
 

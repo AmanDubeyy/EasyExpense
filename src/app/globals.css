@@ -31,3 +31,12 @@ body {
     text-wrap: balance;
   }
 }
+
+@layer base {
+  .font-outline-2 {
+    -webkit-text-stroke: 1px #161F6D;
+  }
+  .font-outline-4 {
+    -webkit-text-stroke: 4px #161F6D;
+  }
+}
