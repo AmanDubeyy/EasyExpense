@@ -1,14 +1,11 @@
-import mongoose from "mongoose";
 import { NextResponse } from "next/server";
-import MONGO_URL from "@/lib/db";
+import connectDB from "@/lib/connectDB";
 import Group from "@/model/group";
 
 export async function POST(req, res) {
   try {
-    await mongoose.connect(MONGO_URL, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+  
+    connectDB();
 
     const data = await req.json();
 

@@ -1,5 +1,6 @@
 import { Inter, Roboto_Mono } from 'next/font/google'
 import './globals.css';
+import { SessionProvider } from "next-auth/react";
 
 const inter = Inter({
   subsets: ['latin'],
@@ -16,7 +17,7 @@ const roboto_mono = Roboto_Mono({
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${inter.variable} ${roboto_mono.variable}`}>
-      <body>{children}</body>
+      <body><SessionProvider>{children}</SessionProvider></body>
     </html>
   )
 }
