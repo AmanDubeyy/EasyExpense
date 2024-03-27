@@ -1,3 +1,4 @@
+"use client"
 import { Inter, Roboto_Mono } from 'next/font/google'
 import './globals.css';
 import { SessionProvider } from "next-auth/react";
