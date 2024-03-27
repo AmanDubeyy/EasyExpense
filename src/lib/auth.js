@@ -39,20 +39,25 @@ export const authConfig = {
     }),
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      authorization: {
+        params: {
+          prompt : 'login'
+        }
+      }
     })
   ],
-  callbacks : {
-    async signIn({profile}) {
-      try{
+  callbacks: {
+    async signIn({ profile }) {
+      try {
         console.log(profile)
         return profile;
       }
-      catch(e){
+      catch (e) {
         console.log(e)
       }
     },
-    async session ({session}){
+    async session({ session }) {
       return session
     }
   }
