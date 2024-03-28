@@ -39,4 +39,7 @@ body {
   .font-outline-4 {
     -webkit-text-stroke: 4px #161F6D;
   }
+  .font-outline-white-2 {
+    -webkit-text-stroke: 1px white;
+  }
 }
