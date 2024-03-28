@@ -15,12 +15,6 @@ const inter = Inter({
   variable: '--font-inter',
 })
  
-const roboto_mono = Roboto_Mono({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-roboto-mono',
-})
- 
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${inter.variable} ${myFont.className}`}>
