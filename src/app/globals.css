@@ -18,12 +18,9 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
+  background: linear-gradient(to bottom,
       transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
 }
 
 @layer utilities {
@@ -36,10 +33,26 @@ body {
   .font-outline-2 {
     -webkit-text-stroke: 1px #161F6D;
   }
+
   .font-outline-4 {
     -webkit-text-stroke: 4px #161F6D;
   }
+
   .font-outline-white-2 {
     -webkit-text-stroke: 1px white;
+  }
+
+  .remove-arrow::-webkit-inner-spin-button,
+  .remove-arrow::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    appearance: none;
+    /* For other browsers */
+  }
+
+  .remove-arrow {
+    /* For other browsers */
+    -webkit-appearance: textfield;
+    appearance: textfield;
   }
 }

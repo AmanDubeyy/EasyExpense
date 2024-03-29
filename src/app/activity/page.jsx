@@ -1,10 +1,12 @@
 import React from 'react'
-import Modal from '../Add'
+import Modal from '../commonComponents/Add'
+import SplitBetween from '../commonComponents/SplitBetween'
 
 function page() {
   return (
     <div>
-      <Modal></Modal>
+      {/* <Modal></Modal> */}
+      <SplitBetween></SplitBetween>
     </div>
   )
 }
