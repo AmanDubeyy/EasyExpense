@@ -1,7 +1,23 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 function SplitBetween() {
+
+  const [splitType, setSplitType] = useState('equal');
+
+  const getSplitText = () => {
+    
+    if (splitType == 'equal') {
+      return 'Split Equally'
+    } else if (splitType == 'percentage') {
+      return 'split based on percentage'
+    } else if (splitType == 'exact') {
+      return 'split exactly'
+    }
+
+    return ""
+  }
+
   const splitTypeOptions = {
     'equal': '=',
     'percentage': '%',
@@ -15,23 +31,29 @@ function SplitBetween() {
     'KAIM'
   ];
 
-  const [splitType, setSplitType] = useState('equal');
 
-  const initialSplit = {};
-
-  users.forEach(user => {
-    const amount = totalAmount / users.length;
-    initialSplit[user] = parseFloat(amount).toFixed(2);
-  });
-
-  const [splitAmount, setSplitAmount] = useState(initialSplit);
+  const [splitAmount, setSplitAmount] = useState('');
+  const [splitBetween, setSplitBetween] = useState(users)
+  const [splitPercentage, setSplitPercentage] = useState('');
 
   const handleSplitAmountChange = (e, user) => {
     if (splitType == 'equal') {
+      const newSplitBetween = [...splitBetween]
 
+      if (splitBetween.includes(user)) {
+        const idx = newSplitBetween.indexOf(user)
+        newSplitBetween.splice(idx, 1);
+        setSplitBetween(newSplitBetween);
+      } else {
+        newSplitBetween.push(user)
+        setSplitBetween(newSplitBetween);
+      }
     }
     else if (splitType == 'percentage') {
-
+      const value = e.target.value;
+      const newSplitPercentage = { ...splitPercentage };
+      newSplitPercentage[user] = value;
+      setSplitPercentage(newSplitPercentage);
     }
     else if (splitType == 'exact') {
       const value = e.target.value;
@@ -57,16 +79,30 @@ function SplitBetween() {
                 <p key={key} className={`p-1 rounded-xl cursor-pointer text-my-blue ${splitType === key && 'bg-white'}`} onClick={() => setSplitType(key)}>{splitTypeOptions[key]}</p>
               ))}
             </div>
+            <div className="text-center">
+              {getSplitText()}
+            </div>
             <div className='flex flex-col'>
               {users.map(val => (
                 <div key={val} className='px-6 py-4 flex flex-row items-center justify-around'>
                   <p className="font-outline-2 text-2xl">{val}</p>
-                  {splitType === 'exact' &&
+                  {
+                    splitType === 'equal' && (
+                      <input
+                        onClick={(e) => handleSplitAmountChange(e, val)}
+                        checked={splitBetween.includes(val)}
+                        type='radio'
+                        className='w-4 h-4 remove-arrow bg-white border-2 border-white rounded-xl outline-my-blue text-center text-black'
+                      />
+                    )
+                  }
+                  {(splitType === 'exact' || splitType === 'percentage') &&
                     <input onChange={(e) => handleSplitAmountChange(e, val)} value={splitAmount[val]}
                       type='number'
                       className='remove-arrow w-20 bg-white border-2 border-white rounded-xl outline-my-blue text-center text-black'
                     ></input>
                   }
+
                 </div>
               ))}
             </div>
