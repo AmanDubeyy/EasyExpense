@@ -2,7 +2,7 @@ import mongoose, { Schema } from "mongoose";
 
 const ExpenseSchema = new Schema({
     'title' : String,
-    'amount' : Float64Array,
+    'amount' : Number,
     'category' : String,
     'paid_by' : String,
     'paid_by_user_id' : String,

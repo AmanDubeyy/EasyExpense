@@ -9,7 +9,7 @@ export async function POST(req, res) {
 
     const data = await req.json();
 
-    const Group = new Group({data});
+    const Group = new Group(data);
 
     Group.save();
 
