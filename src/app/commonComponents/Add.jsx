@@ -5,7 +5,6 @@ import React, { useState } from "react";
 const Modal = () => {
   const [showModal, setShowModal] = useState(true);
   const [paidBy, setPaidBy] = useState("");
-  const [splitBetween, setSplitBetween] = useState("");
 
   const members = ["Person 1", "Person 2", "Person 3"];
 
@@ -13,9 +12,27 @@ const Modal = () => {
     setPaidBy(event.target.value);
   };
 
-  const handleSplitBetweenChange = (event) => {
-    setSplitBetween(event.target.value);
-  };
+  const handleSubmit = () => {
+    var data = {
+      title: '',
+      amount: '',
+      category: '',
+      paid_by: '',
+      paid_by_user_id : '',
+      split_between: '',
+      group_name: '',
+      group_id: ''
+    }
+
+    saveExpense(data)
+  }
+
+  const saveExpense = async (data) => {
+    await axios.post("/api/add-expense", { data })
+      .then((response) => {
+        console.log(response);
+      });
+  }
 
   return (
     <>
@@ -40,7 +57,7 @@ const Modal = () => {
                 <input type="text" className="rounded-xl focus:outline-my-blue"></input>
                 <label className="p-2 text-2xl font-bold font-outline-white-2 text-my-blue">Split Between</label>
                 <input type="text" className="rounded-xl focus:outline-my-blue"></input>
-                <button type="submit" className="mt-6 p-2 rounded-xl bg-my-blue text-3xl font-outline-2">Save</button>
+                <button type="submit" onSubmit={handleSubmit} className="mt-6 p-2 rounded-xl bg-my-blue text-3xl font-outline-2">Save</button>
               </form>
             </div>
           </div>
