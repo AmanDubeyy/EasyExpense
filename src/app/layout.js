@@ -6,7 +6,7 @@ import localFont from 'next/font/local'
  
 // Font files can be colocated inside of `app`
 const myFont = localFont({
-  src: './baveuse/baveuse.otf',
+  src: './font/baveuse/baveuse.otf',
   display: 'swap',
 })
 const inter = Inter({
