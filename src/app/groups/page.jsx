@@ -1,14 +1,11 @@
 'use client'
+import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 
 function page() {
 
     var groups = ['droom', 'teenpatti', 'cricket'];
 
-    useEffect(() => {
-        //api
-
-    }, [])
 
     const [groupPopUp, setGroupPopUp] = useState(false)
     const handleGroupPopup = () => {
@@ -16,6 +13,9 @@ function page() {
     }
 
     const [groupName, setGroupName] = useState('')
+    const handleGroupNameChange = (e) => {
+        setGroupName(e.target.value)
+    }
 
     const CreateGroup = async (data) => {
         await axios.post("/api/create-group", { data })
@@ -26,10 +26,11 @@ function page() {
 
 
     const handleGroupCreation = () => {
-        CreateGroup({
+        const data = {
             group_name: groupName,
             user_ids: []
-        })
+        }
+        CreateGroup(data);
     }
 
     const GroupListContainer = () => {
@@ -48,9 +49,13 @@ function page() {
         return (
             <div className='flex flex-col items-center p-4'>
                 <div className='text-2xl mb-10 text-my-blue font-outline-white-2'>Start a new Group</div>
-                <input className="p-2 rounded-xl focus:outline-my-blue text-black"
-                    type="text" placeholder="enter group name" onChange={(e) => setGroupName(e.value)} val={groupName}
-                ></input>
+                <input
+                    className="p-2 rounded-xl focus:outline-my-blue text-black"
+                    type="text"
+                    placeholder="enter group name"
+                    value={groupName}
+                    onChange={(e) => handleGroupNameChange(e)}
+                />
                 <button className='p-2 my-6 rounded-xl text-2xl bg-my-blue' onClick={handleGroupCreation}>Done</button>
             </div>
         )
@@ -59,7 +64,7 @@ function page() {
     return (
         <div>
             <div className='fixed inset-0 z-50 items-center flex flex-row justify-evenly bg-my-light-blue '>
-                {!groupPopUp ? <GroupListContainer /> : <CreateGroupPopUp />
+                {!groupPopUp ? <GroupListContainer /> : CreateGroupPopUp()
                 }
             </div>
         </div>

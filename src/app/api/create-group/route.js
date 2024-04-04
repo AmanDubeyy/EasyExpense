@@ -4,14 +4,13 @@ import Group from "@/model/group";
 
 export async function POST(req, res) {
   try {
-  
     connectDB();
 
     const data = await req.json();
 
-    const group = new Group(data);
-
-    group.save();
+    const group = new Group(data.data);
+    console.log(group)
+    await group.save();
 
     return NextResponse.json({ code: "success", data: data });
   } catch (e) {
