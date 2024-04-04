@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 
 function page() {
 
-    var groups = ['droom', 'teenpatti'];
+    var groups = ['droom', 'teenpatti', 'cricket'];
 
     useEffect(() => {
         //api
@@ -37,7 +37,7 @@ function page() {
             <div className='flex flex-col items-center p-6 border-2 border-white rounded-xl'>
                 <div className='text-3xl mb-6 text-my-blue'>Your Groups</div>
                 {Object.keys(groups).map(key => (
-                    <p className='p-2 text-xl'>{groups[key]}</p>
+                    <p key={key} className='p-2 text-xl'>{groups[key]}</p>
                 ))}
                 <button className='bg-my-blue my-6 p-2 text-xl rounded-xl' onClick={handleGroupPopup}>Create Group</button>
             </div>
