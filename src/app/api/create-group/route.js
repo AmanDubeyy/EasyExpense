@@ -9,9 +9,9 @@ export async function POST(req, res) {
 
     const data = await req.json();
 
-    const Group = new Group(data);
+    const group = new Group(data);
 
-    Group.save();
+    group.save();
 
     return NextResponse.json({ code: "success", data: data });
   } catch (e) {
