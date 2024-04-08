@@ -3,12 +3,11 @@ import mongoose, { Schema } from "mongoose";
 const ExpenseSchema = new Schema({
     title : String,
     amount : Number,
+    group_id : Number,
     category : String,
-    paid_by : String,
-    paid_by_user_id : String,
+    paid_by : String,   // user_id who paid
     split_between : Array, // [{user_id -> amount }, {..}] 
-    group_name : String,
-    group_id : Number
+    comments : Array
 }, {strict : false})
 
 const Expense = mongoose.models.expense || mongoose.model('expense', ExpenseSchema);
