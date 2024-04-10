@@ -3,10 +3,10 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 
 function page({user_id}) {
-    user_id = 1;
+    user_id = 2;
 
     const [groups, setGroups] = useState([]);
-
+    const [refresh, setRefresh] = useState(true);
     useEffect(() => {
         axios.post('/api/get-groups', {user_id : user_id})
             .then(response => {
@@ -15,7 +15,7 @@ function page({user_id}) {
             .catch(error => {
                 console.error('Error fetching groups:', error);
             });
-    }, []); 
+    }, [refresh]); 
 
     const [groupPopUp, setGroupPopUp] = useState(false)
     const handleGroupPopup = () => {
@@ -29,18 +29,18 @@ function page({user_id}) {
 
     const CreateGroup = async (data) => {
         await axios.post("/api/create-group", { data })
-            .then((response) => {
-                console.log(response);
-            });
+        .then((response) => {
+            handleGroupPopup()
+            setRefresh(!refresh);         
+        });
     }
 
     const handleGroupCreation = () => {
         const data = {
             group_name: groupName,
-            user_id : user_id
+            user_id : user_id,
         }
         CreateGroup(data);
-        handleGroupPopup()
     }
 
     const GroupListContainer = () => {

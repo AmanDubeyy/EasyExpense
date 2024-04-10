@@ -6,9 +6,7 @@ const GroupMemberSchema = new Schema({
     added_by : String
 }, {strict : false})
 
-const GroupMember = mongoose.models.group_member || mongoose.model('group_member', GroupMemberSchema);
-
-GroupMemberSchema.statics.addMemeber = function(group_id, group_name, user_id, added_by) {
+GroupMemberSchema.statics.addMember = function(group_id, group_name, user_id, added_by) {
     return this.create({
         group_id : group_id,
         group_name : group_name,
@@ -16,4 +14,7 @@ GroupMemberSchema.statics.addMemeber = function(group_id, group_name, user_id, a
         added_by : added_by
     })
 };
+
+const GroupMember = mongoose.models.group_member || mongoose.model('group_member', GroupMemberSchema);
+
 export default GroupMember; 
