@@ -3,12 +3,13 @@ import React from 'react'
 function page() {
 
     const groupData = {
-        _id : 'anc',
+        _id : 'abc',
         group_name : 'Teen Patti' 
     }
 
     return (
-        <div>page</div>
+        <div>
+        </div>
     )
 }
 

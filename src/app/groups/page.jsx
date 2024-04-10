@@ -2,10 +2,20 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 
-function page() {
+function page({user_id}) {
+    user_id = 1;
 
-    var groups = ['droom', 'teenpatti', 'cricket'];
+    const [groups, setGroups] = useState([]);
 
+    useEffect(() => {
+        axios.post('/api/get-groups', {user_id : user_id})
+            .then(response => {
+                setGroups(response?.data?.data);
+            })
+            .catch(error => {
+                console.error('Error fetching groups:', error);
+            });
+    }, []); 
 
     const [groupPopUp, setGroupPopUp] = useState(false)
     const handleGroupPopup = () => {
@@ -24,13 +34,13 @@ function page() {
             });
     }
 
-
     const handleGroupCreation = () => {
         const data = {
             group_name: groupName,
-            user_ids: []
+            user_id : user_id
         }
         CreateGroup(data);
+        handleGroupPopup()
     }
 
     const GroupListContainer = () => {
@@ -38,7 +48,7 @@ function page() {
             <div className='flex flex-col items-center p-6 border-2 border-white rounded-xl'>
                 <div className='text-3xl mb-6 text-my-blue'>Your Groups</div>
                 {Object.keys(groups).map(key => (
-                    <p key={key} className='p-2 text-xl'>{groups[key]}</p>
+                    <p key={key} className='p-2 text-xl'>{groups[key]?.group_name}</p>
                 ))}
                 <button className='bg-my-blue my-6 p-2 text-xl rounded-xl' onClick={handleGroupPopup}>Create Group</button>
             </div>
@@ -64,8 +74,7 @@ function page() {
     return (
         <div>
             <div className='fixed inset-0 z-50 items-center flex flex-row justify-evenly bg-my-light-blue '>
-                {!groupPopUp ? <GroupListContainer /> : CreateGroupPopUp()
-                }
+                {!groupPopUp ? <GroupListContainer /> : CreateGroupPopUp()}
             </div>
         </div>
     )
