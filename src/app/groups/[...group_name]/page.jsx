@@ -8,9 +8,47 @@ function page() {
     group_id: "abc",
   });
 
+
+  const menuComponent = () => {
+    switch (menuKey) {
+      case 0:
+        return <recentExpensesComponent />;
+      case 1:
+        return <balancesComponent />;
+      case 2:
+        return <totalBalanceComponent />;
+      default:
+        return <recentExpensesComponent />;
+    }
+  }
+
   const [recentExpenses, setRecentExpenses] = useState([]);
 
   const Menu = ["Recent Expenses", "Balances", "Total"];
+
+  const recentExpensesComponent = () => {
+    return (
+      <div className="flex flex-col">
+
+      </div>
+    )
+  }
+
+  const totalBalanceComponent = () => {
+    return (
+      <div className="flex flex-col">
+
+      </div>
+    )
+  }
+
+  const balancesComponent = () => {
+    return (
+      <div className="flex flex-col">
+
+      </div>
+    )
+  }
 
   return (
     <div className="flex flex-col bg-my-light-blue items-center">
@@ -21,6 +59,7 @@ function page() {
             {Menu[key]}
           </p>
         ))}
+        <menuComponent/>
       </div>
     </div>
   );
